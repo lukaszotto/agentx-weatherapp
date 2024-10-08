@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.search__dropdown {
+  display: none;
+}
+.search__input:focus ~ .search__dropdown {
+  display: block;
+}
