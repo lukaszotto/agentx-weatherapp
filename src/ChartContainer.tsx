@@ -1,4 +1,5 @@
 import { Chart } from 'react-chartjs-2'
+import Datalabels from 'chartjs-plugin-datalabels'
 import {
     Chart as Chartjs,
     RadialLinearScale,
@@ -8,6 +9,11 @@ import {
     Filler,
 } from 'chart.js'
 import { SearchCity } from './service/useAutocompleteQuery'
+import { drawShadowPlugin } from './plugins/drawShadow'
+import { rotateLabelsPlugin } from './plugins/rotateLabels'
+import { areaBackgroundPlugin } from './plugins/areaBackground'
+import { addCirclesPlugin } from './plugins/addCircles'
+
 type ChartContainerProps = {
     dataset: number[]
     selectedCity: SearchCity | undefined
@@ -34,28 +40,39 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
             <Chart
                 type="radar"
                 options={{
+                    plugins: {
+                        areaBackgroundPlugin: {
+                            colors: [
+                                'rgba(242,242,243,255)',
+                                'rgba(233,232,232,255)',
+                                'rgba(233,221,215,255)',
+                                'rgba(215,199,193,255)',
+                                'rgba(209,198,195,255)',
+                            ],
+                        },
+                    },
+                    layout: {
+                        padding: 40,
+                    },
                     responsive: true,
                     scales: {
                         r: {
                             pointLabels: {
-                                color: '#ccc',
-                                font: {
-                                    weight: 'normal',
-                                    size: 18,
-                                },
+                                // pointLabels are drawn by rotateLabelsPlugin
+                                display: false,
                             },
                             angleLines: {
-                                color: '#666',
+                                color: '#c1c1c1',
                                 lineWidth: 1,
                             },
                             grid: {
                                 color: [
                                     '#000',
-                                    '#666',
-                                    '#666',
-                                    '#aaa',
-                                    '#aaa',
-                                    '#aaa',
+                                    '#9a9998',
+                                    '#9a9998',
+                                    '#c7c7c7',
+                                    '#c7c7c7',
+                                    '#c7c7c7',
                                 ],
 
                                 lineWidth: 1,
@@ -73,7 +90,7 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
                     labels: ['Temperature', 'Humidity', 'Wind speed'],
                     datasets: [
                         {
-                            backgroundColor: 'rgba(16, 110, 186, 0.5)',
+                            backgroundColor: 'rgba(129,147,212, 0.5)',
                             fill: true,
                             data: dataset,
                             pointBackgroundColor: 'transparent',
@@ -82,6 +99,12 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
                         },
                     ],
                 }}
+                plugins={[
+                    rotateLabelsPlugin,
+                    areaBackgroundPlugin,
+                    drawShadowPlugin,
+                    addCirclesPlugin,
+                ]}
             ></Chart>
         </div>
     )

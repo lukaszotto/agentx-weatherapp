@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { SEARCH_WEATHER_URL } from '../config'
 import { useQuery } from '@tanstack/react-query'
+import { removePolishChars } from '../helpers/helpers'
 
 export type SearchCity = {
     country: string
@@ -17,7 +18,7 @@ const fetchLocation = async (city: string): Promise<SearchCity[]> => {
     }
     const response = await axios.get(SEARCH_WEATHER_URL, {
         params: {
-            q: city,
+            q: removePolishChars(city),
         },
     })
     return response.data
