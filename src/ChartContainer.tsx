@@ -1,5 +1,4 @@
 import { Chart } from 'react-chartjs-2'
-import Datalabels from 'chartjs-plugin-datalabels'
 import {
     Chart as Chartjs,
     RadialLinearScale,
