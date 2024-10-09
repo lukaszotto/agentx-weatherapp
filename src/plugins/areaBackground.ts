@@ -34,7 +34,6 @@ export const areaBackgroundPlugin = {
                 }
             }
 
-            // Rysujemy wewnętrzny wielokąt w odwrotnej kolejności
             for (let j = labelsCount; j >= 0; j--) {
                 const index = j % labelsCount
                 const innerPoint = scale.getPointPosition(index, innerRadius)

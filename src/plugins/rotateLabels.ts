@@ -6,8 +6,8 @@ export const rotateLabelsPlugin = {
         const ctx = chart.ctx
         const scales = chart.scales.r
         scales.getLabels().forEach((label, i) => {
-            const angleRadians = scales.getIndexAngle(i) // Kąt dla etykiety
-            const position = scales.getPointPosition(i, scales.drawingArea + 20) // Pozycja etykiety
+            const angleRadians = scales.getIndexAngle(i)
+            const position = scales.getPointPosition(i, scales.drawingArea + 20)
             const rotateLablBy = i === 0 ? 0 : angleRadians + Math.PI
             ctx.save()
             ctx.translate(position.x, position.y)
@@ -20,7 +20,7 @@ export const rotateLabelsPlugin = {
             ctx.fillStyle = '#5e5e5e'
             ctx.fillText(label, 0, 0)
 
-            ctx.restore() // Przywracamy pierwotny stan kontekstu
+            ctx.restore()
         })
     },
 }
